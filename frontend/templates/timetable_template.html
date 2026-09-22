@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R P Sarathy Institute of Technology - Time Table</title>
+
+<style>
+* { box-sizing: border-box; }
+
+@page {
+    size: A4 portrait;
+    margin: 6mm;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+    font-family: "Times New Roman", Times, serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 198mm;
+    min-height: 285mm;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+td, th {
+    border: 0.5px solid #666;
+    padding: 2px 3px;
+    font-size: 8.5px;
+    line-height: 1.05;
+}
+
+.editable {
+    min-height: 15px;
+    outline: none;
+    cursor: text;
+}
+
+.editable:focus {
+    background: #fffde7;
+    outline: 1px solid #666;
+    outline-offset: -1px;
+}
+
+/* HEADER */
+.header-table {
+    margin: 0;
+}
+
+.logo-section {
+    width: 55%;
+    height: 55px;
+    padding: 0;
+}
+
+.logo-box {
+    width: 58px;
+    height: 55px;
+    text-align: center;
+    vertical-align: middle;
+    border: none !important;
+    padding: 2px;
+}
+
+.logo {
+    width: 52px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+.college-info {
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 3px;
+    border: none !important;
+}
+
+.college-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.college-name2 {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.college-name3 {
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.approval {
+    font-size: 6px;
+    margin-top: 2px;
+    line-height: 1;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 8px;
+}
+
+.value {
+    font-weight: 500;
+    font-size: 8px;
+}
+
+.section {
+    text-align: center;
+    font-weight: bold;
+    font-size: 8px;
+}
+
+/* WEEKLY TIMETABLE */
+.time-table {
+    margin-top: 5px;
+    width: 100%;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.time-table th {
+    height: 48px;
+    padding: 1px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 7.5px;
+    line-height: 1;
+}
+
+.time-table td {
+    height: 38px;
+    padding: 1px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 8.5px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.day {
+    width: 8%;
+    font-weight: bold;
+    font-size: 8.5px !important;
+}
+
+.time {
+    font-weight: bold;
+}
+
+.break {
+    width: 3.5%;
+    padding: 0 !important;
+    vertical-align: middle !important;
+}
+
+.time-table .break {
+    overflow: hidden;
+    text-align: center;
+}
+
+.vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 6.8px;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.concept {
+    width: 4%;
+    padding: 0 !important;
+}
+
+.lunch {
+    width: 4%;
+    padding: 0 !important;
+}
+
+/* SUBJECT TABLE */
+.subject-table {
+    margin-top: 5px;
+}
+
+.subject-table th {
+    height: 30px;
+    padding: 3px 2px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 7.8px;
+    line-height: 1;
+}
+
+.subject-table td {
+    height: 28px;
+    padding: 3px 2px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 7.5px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.sno {
+    width: 6%;
+    text-align: center;
+}
+
+.acronym {
+    width: 13%;
+}
+
+.code {
+    width: 13%;
+}
+
+.subject-name {
+    width: 29%;
+}
+
+.workload {
+    width: 9%;
+    text-align: center;
+}
+
+.faculty {
+    width: 30%;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    width: 100%;
+    border-collapse: collapse;
+    padding-top: 10px;
+}
+
+.footer td {
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 8.5px;
+    height: 46px;
+    vertical-align: middle;
+}
+
+.footer td:first-child {
+    text-align: left;
+    padding-left: 14px;
+}
+
+.footer td:last-child {
+    text-align: right;
+    padding-right: 14px;
+}
+
+.sig-role {
+    display: block;
+    line-height: 1.1;
+}
+
+.sig-line {
+    display: block;
+    width: 78%;
+    height: 0;
+    border-top: 1px solid #000;
+    margin: 5px auto 0;
+}
+
+.footer td:first-child .sig-line {
+    margin-left: 0;
+}
+
+.footer td:last-child .sig-line {
+    margin-right: 0;
+}
+
+/* BUTTONS */
+.header-table tr:not(:first-child) td {
+    height: 26px;
+    vertical-align: middle;
+}
+
+.button-area {
+    text-align: center;
+    margin-top: 16px;
+}
+
+button {
+    margin: 10px 5px;
+    padding: 7px 12px;
+    border: 1px solid #000;
+    background: #fff;
+    cursor: pointer;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+button:hover {
+    background: #eee;
+}
+
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        display: block;
+    }
+
+    .container {
+        width: 198mm;
+        height: 285mm;
+        min-height: 285mm;
+        margin: 0 auto;
+    }
+
+    button {
+        display: none !important;
+    }
+
+    .button-area {
+        display: none;
+    }
+
+    .editable:focus {
+        background: white;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 8px;
+    }
+
+    .container {
+        flex: 0 0 198mm;
+    }
+}
+
+.logo-inner {
+    width: 100%;
+    height: 100%;
+    border: none !important;
+    border-collapse: collapse;
+}
+
+.logo-inner td {
+    border: none !important;
+}
+
+/* FINAL TIMETABLE COLUMN FIX */
+.time-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.time-table th,
+.time-table td {
+    box-sizing: border-box;
+}
+
+.time-table .break {
+    width: 4.5%;
+    max-width: 4.5%;
+    min-width: 4.5%;
+    padding: 0 !important;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.time-table .concept-head {
+    height: 30px;
+}
+
+.time-table .vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 22px;
+    margin: 0;
+    padding: 0;
+    font-size: 6.8px;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* === TIMETABLE BORDER SYSTEM (single aligned grid) === */
+.time-table {
+    border-collapse: collapse;
+}
+
+.time-table th,
+.time-table td {
+    border: 1px solid #666;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<table class="header-table">
+    <tr>
+        <td colspan="2" class="logo-section">
+            <table class="logo-inner">
+                <tr>
+                    <td class="logo-box">
+                        <img src="{{ logo_src }}" class="logo" alt="RPSIT Logo">
+                    </td>
+                    <td class="college-info">
+                        <div class="college-name">R P Sarathy</div>
+                        <div class="college-name2">Institute of Technology</div>
+                        <div class="college-name3">An Autonomous Institution</div>
+                        <div class="approval">
+                            Approved by AICTE | Accredited by NAAC with A+ | Affiliation in Anna University
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td colspan="2" class="title">TIME TABLE</td>
+    </tr>
+
+    <tr>
+        <td class="label">Document ID</td>
+        <td class="editable value" contenteditable="true">{{ doc_id }}</td>
+        <td class="label">Document Name</td>
+        <td class="editable value" contenteditable="true">{{ doc_name }}</td>
+    </tr>
+
+    <tr>
+        <td class="label">Programme</td>
+        <td class="editable value" contenteditable="true">{{ programme }}</td>
+        <td class="label">Year / Sem</td>
+        <td class="editable value" contenteditable="true">{{ year_sem }}</td>
+    </tr>
+
+    <tr>
+        <td class="label">Regulation</td>
+        <td class="editable value" contenteditable="true">{{ regulation }}</td>
+        <td class="label">Odd / Even</td>
+        <td class="editable value" contenteditable="true">{{ odd_even }}</td>
+    </tr>
+
+    <tr>
+        <td class="label">Academic Year</td>
+        <td class="editable value" contenteditable="true">{{ academic_year }}</td>
+        <td class="label">W.e.f</td>
+        <td class="editable value" contenteditable="true">{{ wef }}</td>
+    </tr>
+</table>
+
+<!-- CLASS ADVISOR / SECTION -->
+<table style="margin-top:5px;">
+    <tr>
+        <td class="label" style="width:32%;">Class Advisor</td>
+        <td class="editable value" contenteditable="true" style="width:18%;">{{ class_advisor }}</td>
+        <td colspan="2" class="section">Section : <span class="editable" contenteditable="true" style="display:inline-block;min-width:35px;">{{ section }}</span></td>
+    </tr>
+</table>
+
+<!-- WEEKLY TIMETABLE -->
+<table class="time-table">
+    <colgroup>
+        <col style="width:8%;">
+        <col style="width:4.5%;">
+        <col style="width:9.5%;">
+        <col style="width:9.5%;">
+        <col style="width:4.5%;">
+        <col style="width:9.5%;">
+        <col style="width:9.5%;">
+        <col style="width:4.5%;">
+        <col style="width:9.5%;">
+        <col style="width:9.5%;">
+        <col style="width:4.5%;">
+        <col style="width:9.5%;">
+        <col style="width:9.5%;">
+    </colgroup>
+
+    <tr>
+        <th class="day">DAY /<br>HOURS</th>
+
+        <!-- CORNER / CONCEPT COLUMN HEADER -->
+        <th class="break concept-head">
+            <div class="vertical">CONCEPT OF THE DAY</div>
+        </th>
+
+        <th class="time">09.05 am<br>to<br>10.00 am</th>
+        <th class="time">10.00 am<br>to<br>11.00 am</th>
+
+        <th class="break">
+            <div class="vertical">BREAK</div>
+        </th>
+
+        <th class="time">11.15 am<br>to<br>12.15 pm</th>
+        <th class="time">12.15 pm<br>to<br>01.00 pm</th>
+
+        <th class="break">
+            <div class="vertical">LUNCH BREAK</div>
+        </th>
+
+        <th class="time">01.40 pm<br>to<br>02.20 pm</th>
+        <th class="time">02.20 pm<br>to<br>03.00 pm</th>
+
+        <th class="break">
+            <div class="vertical">BREAK</div>
+        </th>
+
+        <th class="time">03.10 pm<br>to<br>03.50 pm</th>
+        <th class="time">03.50 pm<br>to<br>04.30 pm</th>
+    </tr>
+
+    <tr>
+        <td class="day">Day-1</td>
+        <td class="break" rowspan="6">
+            <div class="vertical">CONCEPT OF THE DAY</div>
+        </td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[0] }}</td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[1] }}</td>
+        <td class="break" rowspan="6"><div class="vertical">BREAK</div></td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[2] }}</td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[3] }}</td>
+        <td class="break" rowspan="6"><div class="vertical">LUNCH BREAK</div></td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[4] }}</td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[5] }}</td>
+        <td class="break" rowspan="6"><div class="vertical">BREAK</div></td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[6] }}</td>
+        <td class="editable" contenteditable="true">{{ days[0].cells[7] }}</td>
+    </tr>
+
+    <tr>
+        <td class="day">Day-2</td>
+        <td class="editable" contenteditable="true">{{ days[1].cells[0] }}</td><td class="editable" contenteditable="true">{{ days[1].cells[1] }}</td>
+        <td class="editable" contenteditable="true">{{ days[1].cells[2] }}</td><td class="editable" contenteditable="true">{{ days[1].cells[3] }}</td>
+        <td class="editable" contenteditable="true">{{ days[1].cells[4] }}</td><td class="editable" contenteditable="true">{{ days[1].cells[5] }}</td>
+        <td class="editable" contenteditable="true">{{ days[1].cells[6] }}</td><td class="editable" contenteditable="true">{{ days[1].cells[7] }}</td>
+    </tr>
+
+    <tr>
+        <td class="day">Day-3</td>
+        <td class="editable" contenteditable="true">{{ days[2].cells[0] }}</td><td class="editable" contenteditable="true">{{ days[2].cells[1] }}</td>
+        <td class="editable" contenteditable="true">{{ days[2].cells[2] }}</td><td class="editable" contenteditable="true">{{ days[2].cells[3] }}</td>
+        <td class="editable" contenteditable="true">{{ days[2].cells[4] }}</td><td class="editable" contenteditable="true">{{ days[2].cells[5] }}</td>
+        <td class="editable" contenteditable="true">{{ days[2].cells[6] }}</td><td class="editable" contenteditable="true">{{ days[2].cells[7] }}</td>
+    </tr>
+
+    <tr>
+        <td class="day">Day-4</td>
+        <td class="editable" contenteditable="true">{{ days[3].cells[0] }}</td><td class="editable" contenteditable="true">{{ days[3].cells[1] }}</td>
+        <td class="editable" contenteditable="true">{{ days[3].cells[2] }}</td><td class="editable" contenteditable="true">{{ days[3].cells[3] }}</td>
+        <td class="editable" contenteditable="true">{{ days[3].cells[4] }}</td><td class="editable" contenteditable="true">{{ days[3].cells[5] }}</td>
+        <td class="editable" contenteditable="true">{{ days[3].cells[6] }}</td><td class="editable" contenteditable="true">{{ days[3].cells[7] }}</td>
+    </tr>
+
+    <tr>
+        <td class="day">Day-5</td>
+        <td class="editable" contenteditable="true">{{ days[4].cells[0] }}</td><td class="editable" contenteditable="true">{{ days[4].cells[1] }}</td>
+        <td class="editable" contenteditable="true">{{ days[4].cells[2] }}</td><td class="editable" contenteditable="true">{{ days[4].cells[3] }}</td>
+        <td class="editable" contenteditable="true">{{ days[4].cells[4] }}</td><td class="editable" contenteditable="true">{{ days[4].cells[5] }}</td>
+        <td class="editable" contenteditable="true">{{ days[4].cells[6] }}</td><td class="editable" contenteditable="true">{{ days[4].cells[7] }}</td>
+    </tr>
+
+    <tr>
+        <td class="day">Day-6</td>
+        <td class="editable" contenteditable="true">{{ days[5].cells[0] }}</td><td class="editable" contenteditable="true">{{ days[5].cells[1] }}</td>
+        <td class="editable" contenteditable="true">{{ days[5].cells[2] }}</td><td class="editable" contenteditable="true">{{ days[5].cells[3] }}</td>
+        <td class="editable" contenteditable="true">{{ days[5].cells[4] }}</td><td class="editable" contenteditable="true">{{ days[5].cells[5] }}</td>
+        <td class="editable" contenteditable="true">{{ days[5].cells[6] }}</td><td class="editable" contenteditable="true">{{ days[5].cells[7] }}</td>
+    </tr>
+</table>
+
+<!-- SUBJECT DETAILS -->
+<table class="subject-table">
+    <colgroup>
+        <col style="width:6%;">
+        <col style="width:13%;">
+        <col style="width:13%;">
+        <col style="width:29%;">
+        <col style="width:9%;">
+        <col style="width:30%;">
+    </colgroup>
+
+    <tr>
+        <th>S.<br>NO</th>
+        <th>Acronym</th>
+        <th>Subject<br>Code</th>
+        <th>Subject Name</th>
+        <th>Work<br>load</th>
+        <th>Faculty Members</th>
+    </tr>
+
+    <tr>
+        <td class="sno">1</td>
+        <td class="editable" contenteditable="true">{{ subjects[0].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[0].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[0].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[0].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[0].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">2</td>
+        <td class="editable" contenteditable="true">{{ subjects[1].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[1].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[1].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[1].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[1].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">3</td>
+        <td class="editable" contenteditable="true">{{ subjects[2].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[2].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[2].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[2].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[2].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">4</td>
+        <td class="editable" contenteditable="true">{{ subjects[3].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[3].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[3].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[3].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[3].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">5</td>
+        <td class="editable" contenteditable="true">{{ subjects[4].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[4].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[4].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[4].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[4].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">6</td>
+        <td class="editable" contenteditable="true">{{ subjects[5].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[5].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[5].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[5].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[5].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">7</td>
+        <td class="editable" contenteditable="true">{{ subjects[6].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[6].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[6].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[6].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[6].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">8</td>
+        <td class="editable" contenteditable="true">{{ subjects[7].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[7].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[7].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[7].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[7].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">9</td>
+        <td class="editable" contenteditable="true">{{ subjects[8].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[8].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[8].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[8].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[8].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">10</td>
+        <td class="editable" contenteditable="true">{{ subjects[9].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[9].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[9].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[9].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[9].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">11</td>
+        <td class="editable" contenteditable="true">{{ subjects[10].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[10].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[10].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[10].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[10].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">12</td>
+        <td class="editable" contenteditable="true">{{ subjects[11].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[11].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[11].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[11].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[11].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">13</td>
+        <td class="editable" contenteditable="true">{{ subjects[12].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[12].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[12].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[12].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[12].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">14</td>
+        <td class="editable" contenteditable="true">{{ subjects[13].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[13].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[13].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[13].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[13].teacher }}</td>
+    </tr>
+
+    <tr>
+        <td class="sno">15</td>
+        <td class="editable" contenteditable="true">{{ subjects[14].acronym }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[14].code }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[14].name }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[14].workload }}</td>
+        <td class="editable" contenteditable="true">{{ subjects[14].teacher }}</td>
+    </tr>
+
+</table>
+
+<!-- FOOTER -->
+<table class="footer">
+    <tr>
+        <td>
+            <span class="sig-role">TIME TABLE INCHARGE</span>
+            <span class="sig-line"></span>
+        </td>
+        <td>
+            <span class="sig-role">HoD</span>
+            <span class="sig-line"></span>
+        </td>
+        <td>
+            <span class="sig-role">PRINCIPAL</span>
+            <span class="sig-line"></span>
+        </td>
+    </tr>
+</table>
+
+<div class="button-area">
+    <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+</div>
+</body>
+</html>

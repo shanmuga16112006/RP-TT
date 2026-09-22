@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timetable Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>Timetable Generator</h1>
+      </div>
+      <p class="subtitle">Constraint-aware weekly timetable &middot; A4 export</p>
+    </header>
+
+    <section class="card">
+      <div class="card-head">
+        <span class="card-index">01</span>
+        <h2>Institution &amp; Class</h2>
+      </div>
+      <div class="grid meta-grid">
+        <label>Institution Name<input id="m_institution" type="text" /></label>
+        <label>Document ID<input id="m_document" type="text" /></label>
+        <label>Programme<input id="m_programme" type="text" /></label>
+        <label>Year / Sem<input id="m_yearsem" type="text" /></label>
+        <label>Regulation<input id="m_regulation" type="text" /></label>
+        <label>Odd / Even<input id="m_odd" type="text" /></label>
+        <label>Academic Year<input id="m_academic" type="text" /></label>
+        <label>W.E.F<input id="m_wef" type="text" /></label>
+        <label class="span-2">Class Advisor<input id="m_advisor" type="text" /></label>
+        <label class="span-2">Class Name<input id="m_class" type="text" /></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <span class="card-index">02</span>
+                <h2>Subjects</h2>
+                <div class="row-actions">
+                  <button id="add-theory-lab" class="btn btn-ghost" type="button">+ Theory + Lab</button>
+                  <button id="add-theory" class="btn btn-ghost" type="button">+ Theory</button>
+                  <button id="add-extra" class="btn btn-ghost" type="button">+ Extra-curricular</button>
+                </div>
+              </div>
+              <p class="hint" id="hours-hint">Weekly hours: 0 / 48 (6 days × 8 periods)</p>
+              <div class="table-wrap">
+                <table class="subject-table">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Subject Code</th>
+                      <th>Subject Name</th>
+                      <th>Teacher Name</th>
+                      <th>Short Name</th>
+                      <th>Periods</th>
+                      <th>Extra placement</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="subject-rows"></tbody>
+                </table>
+              </div>
+    </section>
+
+    <section class="card actions">
+      <button id="generate" class="btn btn-primary" type="button">Generate</button>
+      <button id="export" class="btn btn-dark" type="button">Download</button>
+    </section>
+
+    <section class="card result-card" id="result-card" hidden>
+      <div class="card-head">
+        <span class="card-index">03</span>
+        <h2 id="result-title">Generated Timetable</h2>
+        <span class="report" id="result-report"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="timetable" id="timetable"></table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

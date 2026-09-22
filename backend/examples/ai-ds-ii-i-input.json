@@ -1,0 +1,88 @@
+{
+  "generation_options": {"variant_count": 3},
+  "departments": [
+    {"id": "AI_DS", "name": "Artificial Intelligence and Data Science", "hod_staff_id": "STF_DINESHKUMAR"}
+  ],
+  "staff": [
+    {"id": "STF_DINESHKUMAR", "name": "Dr. N. Dineshkumar", "designation": "HOD", "home_department_id": "AI_DS", "subjects_taught": ["DLT"], "external_daily_hours": {"MON": 2}},
+    {"id": "STF_SIVASUBRAMANI", "name": "Mr. R. Sivasubramani", "designation": "CC", "home_department_id": "AI_DS", "subjects_taught": ["MC"], "external_daily_hours": {"MON": 2}},
+    {"id": "STF_PARAMESWARI", "name": "Mrs. P. Parameswari", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["DASI"], "external_daily_hours": {}},
+    {"id": "STF_PUSHPA", "name": "Mrs. N. Pushpa", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["DASI", "TT"], "external_daily_hours": {"FRI": 2}},
+    {"id": "STF_SRIMATHI", "name": "Mrs. M. Srimathi", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["CD", "PROJ", "GN"], "external_daily_hours": {"FRI": 2}},
+    {"id": "STF_GOVINDHARAJ", "name": "Mr. V. Govindharaj", "designation": "FACULTY", "home_department_id": "ECE", "subjects_taught": ["IP"], "external_daily_hours": {"THU": 2}},
+    {"id": "STF_VETRIVEL", "name": "Dr. M. Vetrivel", "designation": "FACULTY", "home_department_id": "EEE", "subjects_taught": ["IEV"], "external_daily_hours": {}},
+    {"id": "STF_ILAMBALAJ", "name": "Dr. V. Ilambalaj", "designation": "FACULTY", "home_department_id": "MECH", "subjects_taught": ["IAAIR"], "external_daily_hours": {}},
+    {"id": "STF_VIDYA", "name": "Mrs. D. Vidya", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["ISC2"], "external_daily_hours": {"TUE": 2}},
+    {"id": "STF_RAMAKRISHNAN", "name": "Mr. M. Ramakrishnan", "designation": "FACULTY", "home_department_id": "PLACEMENT", "subjects_taught": ["SDC2"], "external_daily_hours": {"WED": 2}},
+    {"id": "STF_SOUNDARI", "name": "Mrs. M. Soundari", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["DRRM"], "external_daily_hours": {}},
+    {"id": "STF_DIVYAPRIYA", "name": "Mrs. R. Divya Priya", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["CS"], "external_daily_hours": {}},
+    {"id": "STF_SASIDAKA", "name": "Mr. V. Sasidaka", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["LIB"], "external_daily_hours": {"WED": 1}},
+    {"id": "STF_PARTHIPAN", "name": "Mr. G. Parthipan", "designation": "FACULTY", "home_department_id": "AI_DS", "subjects_taught": ["MC"], "external_daily_hours": {"MON": 2}}
+  ],
+  "subjects": [
+    {"id": "DLT", "name": "Deep Learning Techniques", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_DINESHKUMAR"]},
+    {"id": "DASI", "name": "Data Analytics and Statistical Inference", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_PARAMESWARI"]},
+    {"id": "CD", "name": "Compiler Design", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_SRIMATHI"]},
+    {"id": "IP", "name": "Image Processing", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_GOVINDHARAJ"]},
+    {"id": "IEV", "name": "Intelligent Electric Vehicles", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_VETRIVEL"]},
+    {"id": "IAAIR", "name": "Introduction to Application of Artificial Intelligence in Real-time", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_ILAMBALAJ"]},
+    {"id": "ISC2", "name": "Industry Specific Course-II", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_VIDYA"]},
+    {"id": "SDC2", "name": "Skill Development Course-IIa", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_RAMAKRISHNAN"]},
+    {"id": "DRRM", "name": "Disaster Risk Reduction and Management", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_SOUNDARI"]},
+    {"id": "TT", "name": "Technical Training", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_PUSHPA"]},
+    {"id": "MC", "name": "Mentor and Counselling", "department_id": "AI_DS", "has_lab": true, "eligible_staff": ["STF_SIVASUBRAMANI", "STF_PARTHIPAN"]},
+    {"id": "CS", "name": "Club Seminar", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_DIVYAPRIYA"]},
+    {"id": "PROJ", "name": "Project", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_SRIMATHI"]},
+    {"id": "LIB", "name": "Library", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_SASIDAKA"]},
+    {"id": "GN", "name": "GATE and NPTEL", "department_id": "AI_DS", "has_lab": false, "eligible_staff": ["STF_SRIMATHI"]}
+  ],
+  "templates": [
+    {
+      "id": "AI_DS_STANDARD",
+      "days": ["MON", "TUE", "WED", "THU", "FRI", "SAT"],
+      "periods": [
+        {"period_number": 1, "start_time": "09:05", "end_time": "10:00", "type": "TEACHING"},
+        {"period_number": 2, "start_time": "10:00", "end_time": "11:00", "type": "TEACHING"},
+        {"period_number": 3, "start_time": "11:15", "end_time": "12:15", "type": "TEACHING"},
+        {"period_number": 4, "start_time": "12:15", "end_time": "13:00", "type": "TEACHING"},
+        {"period_number": 5, "start_time": "13:40", "end_time": "14:20", "type": "TEACHING"},
+        {"period_number": 6, "start_time": "14:20", "end_time": "15:00", "type": "TEACHING"},
+        {"period_number": 7, "start_time": "15:10", "end_time": "15:50", "type": "TEACHING"},
+        {"period_number": 8, "start_time": "15:50", "end_time": "16:30", "type": "TEACHING"}
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "AI_DS_II_I",
+      "name": "B.Tech AI&DS - II Year / I Semester",
+      "department_id": "AI_DS",
+      "cc_staff_id": "STF_SIVASUBRAMANI",
+      "template_id": "AI_DS_STANDARD",
+      "subjects": [
+        {"subject_id": "DLT", "weekly_theory_periods": 4},
+        {"subject_id": "DASI", "weekly_theory_periods": 5},
+        {"subject_id": "CD", "weekly_theory_periods": 4},
+        {"subject_id": "IP", "weekly_theory_periods": 4},
+        {"subject_id": "IEV", "weekly_theory_periods": 4},
+        {"subject_id": "IAAIR", "weekly_theory_periods": 4},
+        {"subject_id": "DRRM", "weekly_theory_periods": 3},
+        {"subject_id": "TT", "weekly_theory_periods": 1},
+        {"subject_id": "CS", "weekly_theory_periods": 2},
+        {"subject_id": "PROJ", "weekly_theory_periods": 1},
+        {"subject_id": "GN", "weekly_theory_periods": 1}
+      ],
+      "external_allotments": [
+        {"day": "MON", "period_numbers": [5, 6], "type": "LAB", "subject_id": "DLT", "staff_id": "STF_DINESHKUMAR"},
+        {"day": "MON", "period_numbers": [7, 8], "type": "LAB", "subject_id": "MC", "staff_id": null},
+        {"day": "TUE", "period_numbers": [7, 8], "type": "LAB", "subject_id": "ISC2", "staff_id": "STF_VIDYA"},
+        {"day": "WED", "period_numbers": [2], "type": "LIBRARY", "subject_id": "LIB", "staff_id": "STF_SASIDAKA"},
+        {"day": "WED", "period_numbers": [3, 4], "type": "LAB", "subject_id": "SDC2", "staff_id": "STF_RAMAKRISHNAN"},
+        {"day": "THU", "period_numbers": [7, 8], "type": "LAB", "subject_id": "IP", "staff_id": "STF_GOVINDHARAJ"},
+        {"day": "FRI", "period_numbers": [5, 6], "type": "LAB", "subject_id": "DASI", "staff_id": "STF_PUSHPA"},
+        {"day": "FRI", "period_numbers": [7, 8], "type": "LAB", "subject_id": "CD", "staff_id": "STF_SRIMATHI"}
+      ]
+    }
+  ],
+  "overrides": {}
+}
