@@ -2,10 +2,4 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
-*.egg-info/
-dist/
-node_modules/
-tmp/
-backend/generated/
-.openai/
 

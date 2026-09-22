@@ -1,0 +1,4 @@
+[console_scripts]
+timetable-api = backend.timetable.api:main
+timetable-export = backend.timetable.export:main
+timetable-web = frontend.app:main

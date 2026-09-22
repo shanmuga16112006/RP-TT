@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPSIT - Individual Time Table</title>
+
+<style>
+*{box-sizing:border-box}
+
+@page{
+  size:A4 landscape;
+  margin:7mm;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:#fff;
+  color:#000;
+  font-family:"Times New Roman",Times,serif;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+}
+
+.page{
+  width:283mm;
+  min-height:190mm;
+  margin:0 auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+td,th{
+  border:1px solid #222;
+  padding:2px 4px;
+  vertical-align:middle;
+}
+
+/* HEADER */
+.header{
+  height:54px;
+}
+
+.logo-area{
+  width:56%;
+  padding:0;
+}
+
+.logo-inner{
+  width:100%;
+  height:100%;
+  border-collapse:collapse;
+}
+
+.logo-inner td{
+  border:0;
+}
+
+.logo-box{
+  width:76px;
+  text-align:center;
+}
+
+.logo{
+  width:62px;
+  height:52px;
+  object-fit:contain;
+}
+
+.college{
+  text-align:left;
+  padding-left:2px;
+}
+
+.college-name{
+  font-size:27px;
+  line-height:.95;
+  font-weight:bold;
+  letter-spacing:.2px;
+}
+
+.college-name2{
+  font-size:17px;
+  line-height:1;
+  font-weight:bold;
+}
+
+.autonomous{
+  font-size:10px;
+  line-height:1;
+  font-weight:bold;
+}
+
+.approval{
+  font-size:7px;
+  line-height:1;
+  margin-top:2px;
+}
+
+.title{
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+}
+
+/* DETAILS */
+.details td{
+  height:22px;
+  font-size:11px;
+  line-height:1;
+}
+
+.details .label{
+  font-weight:bold;
+  width:18%;
+}
+
+.details .value{
+  width:38%;
+}
+
+.details .right-label{
+  width:18%;
+}
+
+.details .right-value{
+  width:26%;
+}
+
+.editable{
+  min-height:15px;
+  outline:none;
+}
+
+.editable:focus{
+  background:#fffde7;
+}
+
+/* FACULTY */
+.faculty-row{
+  margin-top:3px;
+}
+
+.faculty-row td{
+  height:41px;
+}
+
+.faculty-label{
+  width:32%;
+  text-align:center;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.faculty-value{
+  font-size:14px;
+  line-height:1.05;
+  padding-left:8px;
+}
+
+/* TIMETABLE */
+.time-table{
+  margin-top:0;
+  table-layout:fixed;
+}
+
+.time-table th{
+  height:54px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.08;
+  font-weight:bold;
+  padding:2px;
+}
+
+.time-table td{
+  height:38px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.05;
+  padding:1px;
+}
+
+.day{
+  width:8%;
+  font-weight:bold;
+}
+
+.narrow{
+  width:4.7%;
+  padding:0!important;
+}
+
+.period{
+  width:10%;
+}
+
+.vertical{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  min-height:35px;
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:bold;
+  line-height:1;
+}
+
+.cell-content{
+  min-height:34px;
+  outline:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+}
+
+.cell-content strong{
+  font-size:12px;
+  line-height:1.05;
+}
+
+.cell-content small{
+  font-size:8.5px;
+  line-height:1;
+}
+
+.cell-content .divider{
+  width:90%;
+  height:0;
+  border-top:1px solid #999;
+  margin:2px 0;
+}
+
+.time-label{
+  font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:0;
+}
+
+.footer td{
+  height:34px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.signature{
+  width:100%;
+  text-align:left;
+  padding-left:8px;
+}
+
+/* PRINT */
+@media print{
+  html,body{
+    width:297mm;
+    height:210mm;
+    margin:0;
+    padding:0;
+  }
+
+  body{
+    display:block;
+  }
+
+  .page{
+    width:283mm;
+    height:196mm;
+    min-height:196mm;
+    margin:0 auto;
+  }
+
+  .editable:focus{
+    background:#fff;
+  }
+
+  *{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+
+@media screen and (max-width:1000px){
+  body{
+    justify-content:flex-start;
+    overflow-x:auto;
+    padding:8px;
+  }
+
+  .page{
+    flex:0 0 283mm;
+  }
+}
+
+/* FINAL INDIVIDUAL TIMETABLE ALIGNMENT */
+.faculty-row {
+  position: relative;
+  z-index: 2;
+}
+
+.time-table {
+  position: relative;
+  z-index: 1;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.time-table .vertical-cell {
+  padding: 0 !important;
+  overflow: hidden;
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+.time-table .vertical {
+  position: static;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 3px 0;
+  white-space: nowrap;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.time-table th,
+.time-table td {
+  overflow: hidden;
+}
+
+.time-table .day {
+  vertical-align: middle;
+}
+
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<table>
+  <tr class="header">
+    <td colspan="6" class="logo-area">
+      <table class="logo-inner">
+        <tr>
+          <td class="logo-box">
+            <img src="rpsit_logo.jpeg" class="logo" alt="RPSIT Logo">
+          </td>
+          <td class="college">
+            <div class="college-name">R P Sarathy</div>
+            <div class="college-name2">Institute of Technology</div>
+            <div class="autonomous">An Autonomous Institution</div>
+            <div class="approval">Approved by AICTE | Accredited by NAAC with A+ | Affiliation in Anna University</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td colspan="4" class="title">INDIVIDUAL TIME TABLE</td>
+  </tr>
+</table>
+
+<!-- DETAILS -->
+<table class="details">
+  <tr>
+    <td class="label">Document ID</td>
+    <td class="value editable" contenteditable="true">%%DOC_ID%%</td>
+    <td class="right-label label">Document Name</td>
+    <td class="right-value editable" contenteditable="true">%%DOC_NAME%%</td>
+  </tr>
+  <tr>
+    <td class="label">Programme</td>
+    <td class="value editable" contenteditable="true">%%PROGRAMME%%</td>
+    <td class="right-label label">Year</td>
+    <td class="right-value editable" contenteditable="true">%%YEAR_SEM%%</td>
+  </tr>
+  <tr>
+    <td class="label">Regulation</td>
+    <td class="value editable" contenteditable="true">%%REGULATION%%</td>
+    <td class="right-label label">Odd / Even</td>
+    <td class="right-value editable" contenteditable="true">%%ODD_EVEN%%</td>
+  </tr>
+  <tr>
+    <td class="label">Academic year</td>
+    <td class="value editable" contenteditable="true">%%ACADEMIC_YEAR%%</td>
+    <td class="right-label label">W.e.f</td>
+    <td class="right-value editable" contenteditable="true">%%WEF%%</td>
+  </tr>
+</table>
+
+<!-- FACULTY -->
+<table class="faculty-row">
+  <tr>
+    <td class="faculty-label">Name of the Faculty</td>
+    <td class="faculty-value editable" contenteditable="true">%%FACULTY%%</td>
+  </tr>
+</table>
+
+<!-- INDIVIDUAL TIMETABLE -->
+<table class="time-table">
+  <colgroup>
+    <col style="width:8%">
+    <col style="width:4.7%">
+    <col style="width:10%">
+    <col style="width:10%">
+    <col style="width:4.7%">
+    <col style="width:10%">
+    <col style="width:10%">
+    <col style="width:4.7%">
+    <col style="width:10%">
+    <col style="width:10%">
+    <col style="width:4.7%">
+    <col style="width:10%">
+    <col style="width:10%">
+  </colgroup>
+
+  <!-- The vertical columns span the header + all six days as ONE cell -->
+  <tr>
+    <th class="day">DAY /<br>HOURS</th>
+
+    <th class="narrow vertical-cell" rowspan="7">
+      <div class="vertical">CONCEPT OF THE DAY<br>9.00 am to 9.05 am</div>
+    </th>
+
+    <th class="period time-label">09.05 am<br>to<br>10.00 am</th>
+    <th class="period time-label">10.00 am<br>to<br>11.00 am</th>
+
+    <th class="narrow vertical-cell" rowspan="7">
+      <div class="vertical">BREAK<br>11.00 am to 11.15 am</div>
+    </th>
+
+    <th class="period time-label">11.15 am<br>to<br>12.15 pm</th>
+    <th class="period time-label">12.15 pm<br>to<br>01.00 pm</th>
+
+    <th class="narrow vertical-cell" rowspan="7">
+      <div class="vertical">LUNCH BREAK<br>01.00 pm to 01.40 pm</div>
+    </th>
+
+    <th class="period time-label">01.40 pm<br>to<br>02.20 pm</th>
+    <th class="period time-label">02.20 pm<br>to<br>03.00 pm</th>
+
+    <th class="narrow vertical-cell" rowspan="7">
+      <div class="vertical">BREAK<br>03.00 pm to 03.10 pm</div>
+    </th>
+
+    <th class="period time-label">03.10 pm<br>to<br>03.50 pm</th>
+    <th class="period time-label">03.50 pm<br>to<br>04.30 pm</th>
+  </tr>
+
+  <tr>
+    <td class="day">Day-1</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_0_7%%</div></td>
+  </tr>
+
+  <tr>
+    <td class="day">Day-2</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_1_7%%</div></td>
+  </tr>
+
+  <tr>
+    <td class="day">Day-3</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_2_7%%</div></td>
+  </tr>
+
+  <tr>
+    <td class="day">Day-4</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_3_7%%</div></td>
+  </tr>
+
+  <tr>
+    <td class="day">Day-5</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_4_7%%</div></td>
+  </tr>
+
+  <tr>
+    <td class="day">Day-6</td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_0%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_1%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_2%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_3%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_4%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_5%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_6%%</div></td>
+    <td><div class="cell-content editable" contenteditable="true">%%TCELL_5_7%%</div></td>
+  </tr>
+</table>
+
+<!-- FOOTER -->
+<table class="footer">
+  <tr>
+<td colspan="2" class="signature">Staff Signature: <span class="editable" contenteditable="true"></span></td>
+  </tr>
+</table>
+
+</div>
+</body>
+</html>
